@@ -1,0 +1,49 @@
+﻿<link rel="stylesheet" href="~/css/Success.css" asp-append-version="true" />
+<form>      
+<h2>Qualification Details</h2>
+        <div id="qualifications">
+            <div class="qualification">
+                <label for="courseName1">Course Name:</label>
+                <input type="text" id="courseName1" name="courseName" required><br><br>
+                
+                <label for="percentage1">Percentage:</label>
+                <input type="number" id="percentage1" name="percentage" required><br><br>
+                
+                <label for="year1">Year of Passing:</label>
+                <input type="number" id="year1" name="year" required><br><br>
+            </div>
+        </div>
+        
+        <button type="button" onclick="addQualification()">Add Qualification</button><br><br>
+        
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        let qualificationCount = 1;
+
+        function addQualification() {
+            qualificationCount++;
+            const newQualification = `
+                <div class="qualification">
+                    <label for="courseName${qualificationCount}">Course Name:</label>
+                    <input type="text" id="courseName${qualificationCount}" name="courseName" required><br><br>
+                    
+                    <label for="percentage${qualificationCount}">Percentage:</label>
+                    <input type="number" id="percentage${qualificationCount}" name="percentage" required><br><br>
+                    
+                    <label for="year${qualificationCount}">Year of Passing:</label>
+                    <input type="number" id="year${qualificationCount}" name="year" required><br><br>
+                </div>
+            `;
+            document.getElementById('qualifications').insertAdjacentHTML('beforeend', newQualification);
+        }
+
+        function generateStudentId() {
+            const currentDate = new Date();
+            const studentId = `STU${currentDate.getFullYear()}${currentDate.getMonth() + 1}${currentDate.getDate()}${currentDate.getHours()}${currentDate.getMinutes()}${currentDate.getSeconds()}`;
+            document.getElementById('studentId').value = studentId;
+        }
+
+        document.getElementById('registrationForm').addEventListener('submit', generateStudentId);
+    </script>
